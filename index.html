@@ -82,16 +82,15 @@
            return
     };
 
-    //let data = new Date().toLocaleString();
-let now = new Date();
-let formattedDate = now.toLocaleString("ru", {
- day: "numeric",
- month: "numeric",
- year: "numeric",
- hour: "numeric",
- minute: "numeric",
- hour12: false,
-});
+  
+    let formattedDate = new Date().toLocaleString("ru", {
+   year: "2-digit",
+   month: "2-digit",
+   day: "2-digit",
+   hour: "2-digit",
+   minute: "2-digit",
+  }).replace(", ", " ");
+  console.log(formattedDate);
 
     const allCommentsList = listCommentsElement.innerHTML //прочитаем все содержимое списка комментов
     listCommentsElement.innerHTML = allCommentsList + ` <li class="comment">
