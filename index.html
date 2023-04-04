@@ -73,24 +73,42 @@
   //console.log(nameInputElement.value) //посмотреть значение из имени
 
 
+  //функция доб-я обработчика клика 
+  const initEventListeners = () => {
+    const likesElements = document.querySelectorAll(".like-button");
+    //console.log(likesElements);   -коллекция коментов список
+    for (const likesElement of likesElements) {       //доб обработчик клика на кнопку лайка
+      likesElement.addEventListener('click', () => {
+
+        if (likesElement.classList.contains('-active-like')) {
+          likesElement.classList.remove('-active-like');
+        } else {
+          likesElement.classList.add('-active-like');
+        }
+        return
+
+      })
+    }
+  }
+  initEventListeners();
+
+
   buttonElement.addEventListener("click", () => {
     nameInputElement.classList.remove("error")
     textareaInputElement.classList.remove("error")
     if (nameInputElement.value === "" || textareaInputElement.value === "") {
-            nameInputElement.classList.add("error");
-            textareaInputElement.classList.add("error");
-           return
+      nameInputElement.classList.add("error");
+      textareaInputElement.classList.add("error");
+      return
     };
-
-  
     let formattedDate = new Date().toLocaleString("ru", {
-   year: "2-digit",
-   month: "2-digit",
-   day: "2-digit",
-   hour: "2-digit",
-   minute: "2-digit",
-  }).replace(", ", " ");
-  console.log(formattedDate);
+      year: "2-digit",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+    }).replace(", ", " ");
+    //console.log(formattedDate);
 
     const allCommentsList = listCommentsElement.innerHTML //прочитаем все содержимое списка комментов
     listCommentsElement.innerHTML = allCommentsList + ` <li class="comment">
@@ -109,40 +127,23 @@
               <button class="like-button"></button>
             </div>
           </div>
-        </li> `
+        </li> `;
+
+    initEventListeners();
 
   });
 
 
 
-  // const buttonLikes = document.getElementById('active-like');
-  // const numberElement = document.getElementById('numbers');
-   //console.log(numberElement.innerHTML )
-
-// buttonLikes.addEventListener("click", () => {
-//   numberElement.innerHTML = 0
- 
-    
-//     //numberElement.innerHTML =+ 1;
-
-   
-//   });
 
 
 
 
-// buttonLikes.addEventListener('click', () => {
-//   let count = 0
-//     if(numberElement.classList.contains('likes-counter')) {
-//       numberElement.classList.remove('likes-counter');
-//         count -= 1;
-//     }
-//     else {
-//         count += 1;
-//         numberElement.classList.add('likes-counter');
-//     }
-//     return 
-// });
+
+
+
+
+
     //console.log("It works!");
 </script>
 
