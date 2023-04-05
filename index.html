@@ -73,6 +73,53 @@
   //console.log(nameInputElement.value) //посмотреть значение из имени
 
 
+
+const commentsElements = document.querySelectorAll(".comment")
+const comments = [
+    {
+        name: "Глеб Фокин",
+        text: "Это будет первый комментарий на этой странице",
+        data: "12.02.22 12:18",
+        likeCounter: "3",
+        likeButton: " "
+    },
+    {
+        name: "Варвара Н.",
+        text: " Мне нравится как оформлена эта страница! ❤",
+        data: "13.02.22 19:22",
+        likeCounter:"3",
+        likeButton: "75"
+    }
+    
+];
+
+//создаем рендер функцию
+const renderComments = () => {
+comments.map((comment)=> {
+return ` <li class="comment">
+          <div class="comment-header">
+            <div>${comment.name}</div>
+            <div>${formattedDate}</div>
+          </div>
+          <div class="comment-body">
+            <div class="comment-text">
+              ${comment.text}
+            </div>
+          </div>
+          <div class="comment-footer">
+            <div class="likes">
+              <span class="likes-counter">0</span>
+              <button class="like-button"></button>
+            </div>
+          </div>
+        </li> `
+})
+
+
+
+
+}
+
   //функция доб-я обработчика клика 
   const initEventListeners = () => {
     const likesElements = document.querySelectorAll(".like-button");
@@ -110,8 +157,8 @@
     }).replace(", ", " ");
     //console.log(formattedDate);
 
-    const allCommentsList = listCommentsElement.innerHTML //прочитаем все содержимое списка комментов
-    listCommentsElement.innerHTML = allCommentsList + ` <li class="comment">
+    //прочитаем все содержимое списка комментов
+    listCommentsElement.innerHTML = listCommentsElement.innerHTML + ` <li class="comment">
           <div class="comment-header">
             <div>${nameInputElement.value}</div>
             <div>${formattedDate}</div>
