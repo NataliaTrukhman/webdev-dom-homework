@@ -76,7 +76,7 @@
           <div class="comment-footer">
             <div class="likes">
               <span class="likes-counter">${comments[index].likeCounter}</span>
-              <button data-index= "${index}" class="like-button "></button>
+              <button data-index= "${index}" class="like-button ${comment.likeButton}"></button>
             </div>
           </div>
         </li> `
@@ -89,8 +89,6 @@
 
   };
 
-
-
   //функция доб-я обработчика клика на лайк и счетчик
   const initEventListeners = () => {
     const likesElements = document.querySelectorAll(".like-button");
@@ -100,15 +98,17 @@
         const index = likesElement.dataset.index;
 
         console.log(comments[index].likeCounter);
-        if (likesElement.classList.contains('-active-like')) {
-          likesElement.classList.remove('-active-like');
+        if (comments[index].likeButton == '-active-like') {
+          comments[index].likeButton = '';
           comments[index].likeCounter--
         } else {
-          likesElement.classList.add('-active-like');
+          comments[index].likeButton = '-active-like';
           comments[index].likeCounter++
         }
+
         //return
         renderComments();
+
 
       });
     }
