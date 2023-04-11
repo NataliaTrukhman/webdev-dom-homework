@@ -25,6 +25,10 @@
   .error {
     background-color: red;
   }
+
+  .add-form-text {
+    white-space: pre-line;
+  }
 </style>
 <script>
   // Код писать здесь
@@ -134,7 +138,7 @@
         const answer = commentsElement.dataset.answer;
         //console.log(answer)
         textareaInputElement.innerHTML = answer;
-        answer.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("&", "&amp;").replaceAll('"', "&quot;"),
+        answer.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"),
           renderComments();
       });
 
@@ -162,8 +166,8 @@
     //console.log(formattedDate);
 
     comments.push({                      //добавление в массив нового элемента через форму
-      name: nameInputElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("&", "&amp;").replaceAll('"', "&quot;"),
-      text: textareaInputElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("&", "&amp;").replaceAll('"', "&quot;"),
+      name: nameInputElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"),
+      text: textareaInputElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"),
       data: formattedDate,
       likeCounter: 0,
       likeButton: " "
@@ -174,11 +178,6 @@
     renderComments();       //вызываем фун-ю рендер, чтобы разметка обновилась
 
   });
-
-
-
-
-
 
 
 
