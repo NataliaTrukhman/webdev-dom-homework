@@ -64,6 +64,30 @@
 
   ];
 
+
+
+
+  //добавления ответов на КОММЕНТЫ
+
+  const replyToComment = () => {
+    const commentsElements = document.querySelectorAll(".comment");
+    for (const commentsElement of commentsElements) {
+      commentsElement.addEventListener("click", () => {
+
+        // console.log('проверка')
+        // const answer = commentsElement.dataset.answer;
+        // //console.log(answer)
+        // textareaInputElement.innerHTML = answer;
+        // answer.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"),
+        
+        textareaInputElement.value = commentsElement.dataset.answer;
+        //renderComments();
+       
+      });
+
+    }
+  }
+
   //создаем рендер функцию         //из массива данных делаем html разметку
   const renderComments = () => {
     const commentsHtml = comments.map((comment, index) => {
@@ -90,7 +114,7 @@
     listCommentsElement.innerHTML = commentsHtml;   //кладем сюда разметку
 
     initEventListeners();      //проинициализировать событие на новых создн-х элементах лайки
-  
+    replyToComment()
 
   };
 
@@ -127,27 +151,7 @@
   renderComments();
 
 
-  //добавления ответов на КОММЕНТЫ
-
-  const replyToComment = () => {
-    const commentsElements = document.querySelectorAll(".comment");
-    for (const commentsElement of commentsElements) {
-      commentsElement.addEventListener("click", () => {
-
-        // console.log('проверка')
-        // const answer = commentsElement.dataset.answer;
-        // //console.log(answer)
-        // textareaInputElement.innerHTML = answer;
-        // answer.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"),
-        
-        textareaInputElement.value = commentsElement.dataset.answer;
-        renderComments();
-       
-      });
-
-    }
-  }
-  replyToComment()
+  
 
   //валидация формы полей
 
