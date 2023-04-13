@@ -135,11 +135,14 @@
       commentsElement.addEventListener("click", () => {
 
         // console.log('проверка')
-        const answer = commentsElement.dataset.answer;
-        //console.log(answer)
-        textareaInputElement.innerHTML = answer;
-        answer.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"),
-          renderComments();
+        // const answer = commentsElement.dataset.answer;
+        // //console.log(answer)
+        // textareaInputElement.innerHTML = answer;
+        // answer.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"),
+        
+        textareaInputElement.value = commentsElement.dataset.answer;
+        renderComments();
+        replyToComment()
       });
 
     }
