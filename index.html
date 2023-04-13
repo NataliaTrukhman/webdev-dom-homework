@@ -90,7 +90,7 @@
     listCommentsElement.innerHTML = commentsHtml;   //кладем сюда разметку
 
     initEventListeners();      //проинициализировать событие на новых создн-х элементах лайки
-
+  
 
   };
 
@@ -142,7 +142,7 @@
         
         textareaInputElement.value = commentsElement.dataset.answer;
         renderComments();
-        replyToComment()
+       
       });
 
     }
@@ -179,7 +179,7 @@
     textareaInputElement.value = ''
 
     renderComments();       //вызываем фун-ю рендер, чтобы разметка обновилась
-
+   
   });
 
 
