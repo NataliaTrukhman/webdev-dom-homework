@@ -42,11 +42,32 @@
   //listCommentsElement.innerHTML = "изменение" //изменить содержимое 
   //console.log(textareaInputElement.type) //получаем значение типа
   //console.log(nameInputElement.value) //посмотреть значение из имени
-
-
-
   //const commentsElements = document.querySelectorAll(".comment")
-  const comments = [
+
+  //2.12 API 1. GET, POST, DELETE
+  //ПОЛУЧИТЬ ДАННЫЕ(СПИСОК КОММЕНТОВ) ИЗ api Fetch
+  const promiseFetch = fetch('https://webdev-hw-api.vercel.app/api/v1/natalia-trukhman/comments',
+    {
+      method: "GET",
+    });
+  //console.log(promiseFetch);
+  // подписываемся на успешное завершение запроса с помощью then - это метод у promise
+  promiseFetch.then((response) => {
+    // Запускаем преобразовываем "сырые" данные от API в json формат
+    //console.log(response);
+    const jsonPromise = response.json();
+    // Подписываемся на результат преобразования
+    jsonPromise.then((answer) => {
+      //console.log(answer);
+      // получили данные и рендерим их в приложении
+      comments = answer.comments;
+      renderComments();
+
+    })
+  })
+
+
+  let comments = [
     {
       name: "Глеб Фокин",
       text: "Это будет первый комментарий на этой странице",
@@ -79,10 +100,10 @@
         // //console.log(answer)
         // textareaInputElement.innerHTML = answer;
         // answer.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"),
-        
+
         textareaInputElement.value = commentsElement.dataset.answer;
         //renderComments();
-       
+
       });
 
     }
@@ -151,7 +172,7 @@
   renderComments();
 
 
-  
+
 
   //валидация формы полей
 
@@ -183,7 +204,7 @@
     textareaInputElement.value = ''
 
     renderComments();       //вызываем фун-ю рендер, чтобы разметка обновилась
-   
+
   });
 
 
