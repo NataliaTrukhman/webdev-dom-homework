@@ -64,9 +64,15 @@
       const appComments = answerApi.comments.map((comment) => {
         return {
           name: comment.author.name,
-          date: new Date(comment.date),
+          date: new Date().toLocaleString("ru", {
+            year: "2-digit",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+          }).replace(", ", " "),
           text: comment.text,
-          likes:comment.likes,
+          likes: comment.likes,
           isliked: false,
         }
       });
@@ -77,26 +83,6 @@
 
     });
   });
-
-
-  // let comments = [
-  //   {
-  //     name: "Глеб Фокин",
-  //     text: "Это будет первый комментарий на этой странице",
-  //     data: "12.02.22 12:18",
-  //     likeCounter: '3',
-  //     likeButton: " "
-  //   },
-  //   {
-  //     name: "Варвара Н.",
-  //     text: "Мне нравится как оформлена эта страница! ❤",
-  //     data: "13.02.22 19:22",
-  //     likeCounter: '75',
-  //     likeButton: "-active-like"
-  //   }
-
-  // ];
-
 
 
 
@@ -125,10 +111,10 @@
   const renderComments = () => {
     const commentsHtml = comments.map((comment, index) => {
       return ` <li class="comment" data-answer=" > ${comment.text} ,
-         ${comment.author.name}  ">
+         ${comments[index].name}  ">
           <div class="comment-header">
-            <div>${comment.author.name}</div>
-            <div>${comment.date}</div>
+            <div>${comments[index].name}</div>
+            <div>${comments[index].date}</div>
           </div>
           <div class="comment-body">
             <div class="comment-text">
