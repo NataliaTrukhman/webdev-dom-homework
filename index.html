@@ -149,18 +149,23 @@
         event.stopPropagation();
         const index = likesElement.dataset.index;
 
+      if (comments[index].isliked) {
+      comments[index].isliked = false;
+      comments[index].likes--
+    } else {
+      comments[index].isliked = true;
+      comments[index].likes++
+   }
+        // if (comments[index].isliked == '-active-like') {
+        //   comments[index].isliked = '';
+        //   comments[index].likes--
 
-        if (comments[index].isliked == '-active-like') {
-          comments[index].isliked = '';
-          comments[index].likes--
-
-        } else {
-          comments[index].isliked = '-active-like';
-          comments[index].likes++
-        }
+        // } else {
+        //   comments[index].isliked = '-active-like';
+        //   comments[index].likes++
+        // }
 
 
-        //return
         renderComments();
 
 
