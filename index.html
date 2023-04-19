@@ -46,24 +46,21 @@
 
   //2.12 API 1. GET, POST, DELETE
   //ПОЛУЧИТЬ ДАННЫЕ(СПИСОК КОММЕНТОВ) ИЗ api Fetch
-
+ // 2.13 API 2. Цепочки промисов
 
   let comments = [];
   const getFetch = () => {
 
-    const promiseFetch = fetch('https://webdev-hw-api.vercel.app/api/v1/natalia-trukhman/comments',
+    return fetch('https://webdev-hw-api.vercel.app/api/v1/natalia-trukhman/comments',
       {
         method: "GET",
-      });
-    //console.log(promiseFetch);
-    // подписываемся на успешное завершение запроса с помощью then - это метод у promise
-    promiseFetch.then((response) => {
-      // Запускаем преобразовываем "сырые" данные от API в json формат
-      //console.log(response);
-      const jsonPromise = response.json();
+      })
+      .then((response) => {
+        return response.json();
+      })
       // Подписываемся на результат преобразования
-      jsonPromise.then((answerApi) => {
-        console.log(answerApi);
+      .then((answerApi) => {
+        //console.log(answerApi);
         const appComments = answerApi.comments.map((comment) => {
           return {
             name: comment.author.name,
@@ -83,12 +80,9 @@
         comments = appComments;
         //console.log(comments)
         renderComments();
-
       });
-    });
-
   };
-  getFetch();
+
 
 
   //добавления ответов на КОММЕНТЫ
@@ -137,7 +131,7 @@
 
   };
 
-
+  getFetch();
 
 
   ////функция доб-я обработчика клика на  ЛАЙК и счетчик///
@@ -149,23 +143,13 @@
         event.stopPropagation();
         const index = likesElement.dataset.index;
 
-      if (comments[index].isliked) {
-      comments[index].isliked = false;
-      comments[index].likes--
-    } else {
-      comments[index].isliked = true;
-      comments[index].likes++
-   }
-        // if (comments[index].isliked == '-active-like') {
-        //   comments[index].isliked = '';
-        //   comments[index].likes--
-
-        // } else {
-        //   comments[index].isliked = '-active-like';
-        //   comments[index].likes++
-        // }
-
-
+        if (comments[index].isliked) {
+          comments[index].isliked = false;
+          comments[index].likes--
+        } else {
+          comments[index].isliked = true;
+          comments[index].likes++
+        }
         renderComments();
 
 
@@ -181,49 +165,41 @@
   //валидация формы полей
 
   buttonElement.addEventListener("click", () => {
-    nameInputElement.classList.remove("error")
-    textareaInputElement.classList.remove("error")
-    if (nameInputElement.value === "" || textareaInputElement.value === "") {
-      nameInputElement.classList.add("error");
-      textareaInputElement.classList.add("error");
-      return
+    // nameInputElement.classList.remove("error")
+    // textareaInputElement.classList.remove("error")
+     if (nameInputElement.value === "" || textareaInputElement.value === "") {
+    //   nameInputElement.classList.add("error");
+    //   textareaInputElement.classList.add("error");
+       return
     };
-    // let formattedDate = new Date().toLocaleString("ru", {
-    //   year: "2-digit",
-    //   month: "2-digit",
-    //   day: "2-digit",
-    //   hour: "2-digit",
-    //   minute: "2-digit",
-    // }).replace(", ", " ");
-    //console.log(formattedDate);
 
-    // comments.push({                      //добавление в массив нового элемента через форму
-    //   name: nameInputElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"),
-    //   text: textareaInputElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"),
-    //   date: formattedDate,
-    //   likes: 0,
-    //   isLiked: false
-    // });
+    const startAt = Date.now();
+    console.log("Начинаем делать запрос");
 
+    buttonElement.disabled = true;   //атрибут блокирования кнопки
+    buttonElement.textContent = "Комментарий загружается...";
 
-    const promiseFetch = fetch('https://webdev-hw-api.vercel.app/api/v1/natalia-trukhman/comments',
+    console.log(buttonElement.textContent);
+    fetch('https://webdev-hw-api.vercel.app/api/v1/natalia-trukhman/comments',
       {
         method: "POST",
         body: JSON.stringify({
           text: textareaInputElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"),
           name: nameInputElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"),
         })
+      })
+      .then((response) => {
+        console.log("Время: " + (Date.now() - startAt));
+        return response;
+      })
+      .then(() => {
+        return getFetch();
+      })
+      .then(() => {
+        buttonElement.disabled = false;
+        buttonElement.textContent = "Написать";
+        
       });
-    //console.log(promiseFetch);
-    // подписываемся на успешное завершение запроса с помощью then - это метод у promise
-    promiseFetch.then((response) => {
-      // console.log(response);
-      getFetch();
-
-
-      //renderComments();
-
-    });
 
     nameInputElement.value = ''
     textareaInputElement.value = ''
