@@ -184,7 +184,7 @@
 
     buttonElement.disabled = true;   //атрибут блокирования кнопки
     buttonElement.textContent = "Комментарий загружается...";
-    
+
 
     //console.log(buttonElement.textContent);
     formInputElement.style.display = "none"
@@ -209,14 +209,11 @@
         }
       })
       .then(() => {
-        return getFetch();
-      })
-      .then(() => {
+        getFetch();
         buttonElement.disabled = false;
         buttonElement.textContent = "Написать";
         nameInputElement.value = ''
         textareaInputElement.value = ''
-        //formInputElement.style.display = "none"
         formInputElement.style.display = "flex"
 
 
