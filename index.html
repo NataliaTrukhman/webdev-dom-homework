@@ -37,6 +37,7 @@
   const listCommentsElement = document.getElementById('list-comments');
   const nameInputElement = document.getElementById('name-input');
   const textareaInputElement = document.getElementById('textarea-input');
+  const formInputElement = document.querySelector('.add-form');
 
   //console.log(listCommentsElement.innerHTML);//прочитали содержимое
   //listCommentsElement.innerHTML = "изменение" //изменить содержимое 
@@ -46,7 +47,7 @@
 
   //2.12 API 1. GET, POST, DELETE
   //ПОЛУЧИТЬ ДАННЫЕ(СПИСОК КОММЕНТОВ) ИЗ api Fetch
- // 2.13 API 2. Цепочки промисов
+  // 2.13 API 2. Цепочки промисов
 
   let comments = [];
   const getFetch = () => {
@@ -75,7 +76,12 @@
             likes: comment.likes,
             isliked: false,
           }
-        });
+        })
+        // .catch((error) => {                 //упал инет
+        //   alert("Что-то пошло не так, попробуй позже!");
+        //   console.warn(error); //отправлять в систему сбора ошибок
+
+        // });
         // получили данные и рендерим их в приложении
         comments = appComments;
         //console.log(comments)
@@ -167,42 +173,68 @@
   buttonElement.addEventListener("click", () => {
     // nameInputElement.classList.remove("error")
     // textareaInputElement.classList.remove("error")
-     if (nameInputElement.value === "" || textareaInputElement.value === "") {
-    //   nameInputElement.classList.add("error");
-    //   textareaInputElement.classList.add("error");
-       return
+    if (nameInputElement.value === "" || textareaInputElement.value === "") {
+      //   nameInputElement.classList.add("error");
+      //   textareaInputElement.classList.add("error");
+      return
     };
 
-    const startAt = Date.now();
-    console.log("Начинаем делать запрос");
+    //const startAt = Date.now();
+    //console.log("Начинаем делать запрос");
 
     buttonElement.disabled = true;   //атрибут блокирования кнопки
     buttonElement.textContent = "Комментарий загружается...";
 
-    console.log(buttonElement.textContent);
+
+    //console.log(buttonElement.textContent);
+    formInputElement.style.display = "none"
     fetch('https://webdev-hw-api.vercel.app/api/v1/natalia-trukhman/comments',
+
       {
         method: "POST",
         body: JSON.stringify({
           text: textareaInputElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"),
           name: nameInputElement.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"),
+          //forceError: true,
         })
       })
       .then((response) => {
-        console.log("Время: " + (Date.now() - startAt));
-        return response;
+        console.log(response)
+        if (response.status === 201) {
+          return response.json();
+        } else if (response.status === 400) {
+          throw new Error("name должен содержать хотя бы 3 символа")
+        } else {
+          throw new Error("Сервер упал");
+        }
       })
       .then(() => {
-        return getFetch();
-      })
-      .then(() => {
+        getFetch();
         buttonElement.disabled = false;
         buttonElement.textContent = "Написать";
-        
+        nameInputElement.value = ''
+        textareaInputElement.value = ''
+        formInputElement.style.display = "flex"
+
+
+      })
+      .catch((error) => {                 //упал инет
+        if (error.message === "name должен содержать хотя бы 3 символа") {
+          alert("Поле имя и комментарий должны содержать хотя бы 3 символа")
+        } else {
+          alert("Что-то пошло не так, попробуй позже!")
+          formInputElement.style.display = "none"
+
+        }
+        formInputElement.style.display = "flex"
+        buttonElement.disabled = false; //включение кнопки когда инет появился
+        buttonElement.textContent = "Написать";
+        console.warn(error); //отправлять в систему сбора ошибок
+
+
       });
 
-    nameInputElement.value = ''
-    textareaInputElement.value = ''
+
   });
 
 
