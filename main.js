@@ -1,16 +1,20 @@
+import getListComments  from "./callbacklist.js";
+import renderComments from "./renderFunction.js";
+
+
+
 const buttonElement = document.getElementById('write-button');
 const listCommentsElement = document.getElementById('list-comments');
 const nameInputElement = document.getElementById('name-input');
 const textareaInputElement = document.getElementById('textarea-input');
 const formInputElement = document.querySelector('.add-form');
 
-//console.log(listCommentsElement.innerHTML);//прочитали содержимое
-//listCommentsElement.innerHTML = "изменение" //изменить содержимое 
-//console.log(textareaInputElement.type) //получаем значение типа
-//console.log(nameInputElement.value) //посмотреть значение из имени
-//const commentsElements = document.querySelectorAll(".comment")
 
 let comments = [];
+
+
+renderComments(listCommentsElement, getListComments);
+
 
 const getFetch = () => {
 
@@ -65,34 +69,34 @@ const replyToComment = () => {
 }
 
 //создаем рендер функцию         //из массива данных делаем html разметку
-const renderComments = () => {
-    const commentsHtml = comments.map((comment, index) => {
-        return ` <li class="comment" data-answer=" > ${comment.text} ,
-         ${comments[index].name}  ">
-          <div class="comment-header">
-            <div>${comments[index].name}</div>
-            <div>${comments[index].date}</div>
-          </div>
-          <div class="comment-body">
-            <div class="comment-text">
-              ${comment.text}
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">${comments[index].likes}</span>
-              <button data-index= "${index}" class="like-button ${comment.isliked ? "-active-like" : ""}"></button>
-            </div>
-          </div>
-        </li> `
-    }).join("");
-    // console.log(commentsHtml)
-    listCommentsElement.innerHTML = commentsHtml;   //кладем сюда разметку
+// const renderComments = () => {
+//     const commentsHtml = comments.map((comment, index) => {
+//         return ` <li class="comment" data-answer=" > ${comment.text} ,
+//          ${comments[index].name}  ">
+//           <div class="comment-header">
+//             <div>${comments[index].name}</div>
+//             <div>${comments[index].date}</div>
+//           </div>
+//           <div class="comment-body">
+//             <div class="comment-text">
+//               ${comment.text}
+//             </div>
+//           </div>
+//           <div class="comment-footer">
+//             <div class="likes">
+//               <span class="likes-counter">${comments[index].likes}</span>
+//               <button data-index= "${index}" class="like-button ${comment.isliked ? "-active-like" : ""}"></button>
+//             </div>
+//           </div>
+//         </li> `
+//     }).join("");
+//     // console.log(commentsHtml)
+//     listCommentsElement.innerHTML = commentsHtml;   //кладем сюда разметку
 
-    initEventListeners();      //проинициализировать событие на новых создн-х элементах лайки
-    replyToComment()
+//     initEventListeners();      //проинициализировать событие на новых создн-х элементах лайки
+//     replyToComment()
 
-};
+// };
 
 getFetch();
 
@@ -120,7 +124,7 @@ const initEventListeners = () => {
     }
 };
 
-renderComments();
+//renderComments();
 
 
 
