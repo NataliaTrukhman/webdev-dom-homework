@@ -1,5 +1,5 @@
 import { comments } from './api.js';
-import getListComments from './callbacklist.js';
+import getListComments from './renderCommentList.js';
 import { initEventListeners, replyToComment } from './main.js';
 const listCommentsElement = document.getElementById('list-comments');
 
