@@ -1,4 +1,13 @@
-const getFetch = () => {
+ 
+ 
+ 
+ 
+ export let comments = [];
+ 
+ 
+ 
+ 
+ export const getFetch = () => {
 
     return fetch('https://webdev-hw-api.vercel.app/api/v1/natalia-trukhman/comments',
         {
@@ -31,3 +40,4 @@ const getFetch = () => {
             renderComments(listCommentsElement, getListComments);
         });
 };
+export default getFetch;

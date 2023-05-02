@@ -10,7 +10,7 @@ const textareaInputElement = document.getElementById('textarea-input');
 const formInputElement = document.querySelector('.add-form');
 
 
-let comments = [];
+
 
 
 renderComments(listCommentsElement, getListComments);

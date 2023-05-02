@@ -1,4 +1,4 @@
-
+import getFetch from "./api.js"
 
 const renderComments = (listCommentsElement, getListComments) => {
     const commentsHtml = comments.map((comment, index) => getListComments(comment, index)).join("");
