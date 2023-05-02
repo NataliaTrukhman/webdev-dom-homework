@@ -2,10 +2,10 @@
 
 const getListComments = (comment, index) => {
     return ` <li class="comment" data-answer=" > ${comment.text} ,
-         ${comments[index].name}  ">
+         ${comment.name}  ">
           <div class="comment-header">
-            <div>${comments[index].name}</div>
-            <div>${comments[index].date}</div>
+            <div>${comment.name}</div>
+            <div>${comment.date}</div>
           </div>
           <div class="comment-body">
             <div class="comment-text">
@@ -14,7 +14,7 @@ const getListComments = (comment, index) => {
           </div>
           <div class="comment-footer">
             <div class="likes">
-              <span class="likes-counter">${comments[index].likes}</span>
+              <span class="likes-counter">${comment.likes}</span>
               <button data-index= "${index}" class="like-button ${comment.isliked ? "-active-like" : ""}"></button>
             </div>
           </div>
