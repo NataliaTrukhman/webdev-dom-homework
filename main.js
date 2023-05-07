@@ -1,7 +1,7 @@
 
 // План
 // 1. Реализовать форму логина в приложении
-// * Перенести всю разметку в рендер функцию
+// * Перенести всю разметку в рендер функцию(+)
 // * Сделать форму входа динамической
 // * Oтрефакторить приложение на модули
 // * API (+)
@@ -34,7 +34,7 @@ const buttonElement = document.getElementById('write-button');
 
 
             textareaInputElement.value = commentsElement.dataset.answer;
-            //renderComments();
+            //renderAppComments();
 
         });
 
@@ -64,7 +64,7 @@ export const initEventListeners = () => {
     }
 };
 
-//renderComments();
+//renderAppComments();
 
 getFetch();
 

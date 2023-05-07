@@ -1,16 +1,51 @@
-import { comments, postClick, getFetch} from './api.js';
+import { comments, postClick, getFetch } from './api.js';
 import getListComments from './renderCommentList.js';
 import { initEventListeners, replyToComment } from './main.js';
-const host = 'https://webdev-hw-api.vercel.app/api/v2/natalia-trukhman/comments'
-const token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
 
+
+const host = 'https://webdev-hw-api.vercel.app/api/v2/natalia-trukhman/comments'
+let token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
+token = null
 const renderAppComments = () => {
     const appElement = document.getElementById("app");
+    if (!token) {
+        const appHtml = `
+    <div class="container">
+    <h1>Лента комментариев</h1>
+
+ <div class="add-form">
+      <h3>Форма входа</h3>
+      <input type="text" class="add-form-login" placeholder="Введите логин" id="login-input"/>
+      <br />
+      <input type="password" class="add-form-login" placeholder="Введите пароль" id="password-input"/>
+
+      <div class="add-form2">
+        <button class="add-form-button1" id="login-button">Войти</button>
+      </div>
+    </div>
+
+
+  </div>`
+       
+        appElement.innerHTML = appHtml;   //кладем сюда разметку 
+        document.getElementById("login-button").addEventListener('click', () => {
+            token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
+            //renderAppComments ();
+
+           
+            getFetch()
+        });
+        return;
+      
+
+    }
+
     const commentsHtml = comments
-    .map((comment, index) => getListComments(comment, index)).join("");
+        .map((comment, index) => getListComments(comment, index)).join("");
 
     const appHtml = `
     <div class="container">
+    <h1>Лента комментариев</h1>
     <ul class="comments" id="list-comments">
       <!-- Список рендерится из JS -->
       ${commentsHtml}
@@ -26,26 +61,11 @@ const renderAppComments = () => {
       </div>
     </div>
 
-    <div class="add-form">
-      <h3>Форма входа</h3>
-      <input type="text" class="add-form-login" placeholder="Введите логин" id="login-input"/>
-      <br />
-      <input type="password" class="add-form-login" placeholder="Введите пароль" id="password-input"/>
-
-      <div class="add-form2">
-        <button class="add-form-button1" id="login-button">Войти</button>
-      </div>
-    </div>
-
-
   </div>`
 
-
-    
-    // console.log(commentsHtml)
     appElement.innerHTML = appHtml;   //кладем сюда разметку
 
-    const listCommentsElement = document.getElementById('list-comments');
+
     const nameInputElement = document.getElementById('name-input');
     const textareaInputElement = document.getElementById('textarea-input');
     const buttonElement = document.getElementById('write-button');
@@ -57,7 +77,7 @@ const renderAppComments = () => {
         textareaInputElement.classList.remove("error")
         if (nameInputElement.value === '' || textareaInputElement.value === '') {
             nameInputElement.classList.add("error");
-              textareaInputElement.classList.add("error");
+            textareaInputElement.classList.add("error");
             return;
         }
 

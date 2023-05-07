@@ -4,7 +4,7 @@ const nameInputElement = document.getElementById('name-input');
 const formInputElement = document.querySelector('.add-form');
 const textareaInputElement = document.getElementById('textarea-input');
 const buttonElement = document.getElementById('write-button');
-
+const listCommentsElement = document.getElementById('list-comments');
 
 const token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
 const host = 'https://webdev-hw-api.vercel.app/api/v2/natalia-trukhman/comments'
