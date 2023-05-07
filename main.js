@@ -1,3 +1,17 @@
+
+// План
+// 1. Реализовать форму логина в приложении
+// * Перенести всю разметку в рендер функцию
+// * Сделать форму входа динамической
+// * Oтрефакторить приложение на модули
+// * API (+)
+//  Вытащить логин компонент в отдельный модуль
+//  Вытащить компонент списка задач и форму добавления в отдельный модуль
+// 2. Реализовать форму регистрации
+
+
+
+
 import { comments, getFetch, postClick } from './api.js';
 import renderComments from "./renderFunction.js";
 
@@ -56,7 +70,9 @@ getFetch();
 
 
 
-buttonElement.addEventListener('click', postClick);
+//buttonElement.addEventListener('click', postClick);
+
+
 
 
 

@@ -5,17 +5,26 @@ const formInputElement = document.querySelector('.add-form');
 const textareaInputElement = document.getElementById('textarea-input');
 const buttonElement = document.getElementById('write-button');
 
- 
+
+const token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
+const host = 'https://webdev-hw-api.vercel.app/api/v2/natalia-trukhman/comments'
  
  export let comments = [];
  
  export const getFetch = () => {
 
-    return fetch('https://webdev-hw-api.vercel.app/api/v1/natalia-trukhman/comments',
+    return fetch(host,
         {
             method: "GET",
+            headers: {
+                Authorization: token,
+            },
+
         })
         .then((response) => {
+            // if(response.status === 400){
+            // throw new Error("Нет авторизации");//кинуть ошибку
+            // }
             return response.json();
         })
         // Подписываемся на результат преобразования
@@ -45,11 +54,11 @@ const buttonElement = document.getElementById('write-button');
 
 
 export const postClick = () => {
-    nameInputElement.classList.remove("error")
-    textareaInputElement.classList.remove("error")
+    // nameInputElement.classList.remove("error")
+    // textareaInputElement.classList.remove("error")
     if (nameInputElement.value === '' || textareaInputElement.value === '') {
           nameInputElement.classList.add("error");
-          textareaInputElement.classList.add("error");
+        //   textareaInputElement.classList.add("error");
         return;
     }
 
@@ -58,9 +67,7 @@ export const postClick = () => {
 
     formInputElement.style.display = 'none';
     fetch(
-        'https://webdev-hw-api.vercel.app/api/v1/natalia-trukhman/comments',
-
-        {
+       host, {
             method: 'POST',
             body: JSON.stringify({
                 text: textareaInputElement.value
@@ -73,8 +80,10 @@ export const postClick = () => {
                     .replaceAll('"', '&quot;'),
                 //forceError: true,
             }),
-        }
-    )
+            headers: {
+                Authorization: token,
+            },
+        })
         .then((response) => {
             console.log(response);
             if (response.status === 201) {
