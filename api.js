@@ -1,5 +1,5 @@
  
-import renderComments from './renderFunction.js';
+import renderAppComments from './renderFunction.js';
 const nameInputElement = document.getElementById('name-input');
 const formInputElement = document.querySelector('.add-form');
 const textareaInputElement = document.getElementById('textarea-input');
@@ -48,7 +48,7 @@ const host = 'https://webdev-hw-api.vercel.app/api/v2/natalia-trukhman/comments'
             // получили данные и рендерим их в приложении
             comments = appComments;
 
-            renderComments();
+            renderAppComments();
         });
 };
 

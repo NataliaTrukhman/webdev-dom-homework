@@ -13,7 +13,7 @@
 
 
 import { comments, getFetch, postClick } from './api.js';
-import renderComments from "./renderFunction.js";
+import renderAppComments from "./renderFunction.js";
 
 
 
@@ -57,7 +57,7 @@ export const initEventListeners = () => {
                 comments[index].isliked = true;
                 comments[index].likes++
             }
-            renderComments();
+            renderAppComments;
 
 
         });

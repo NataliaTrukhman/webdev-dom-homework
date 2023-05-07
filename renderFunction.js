@@ -4,7 +4,7 @@ import { initEventListeners, replyToComment } from './main.js';
 const host = 'https://webdev-hw-api.vercel.app/api/v2/natalia-trukhman/comments'
 const token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
 
-const renderComments = () => {
+const renderAppComments = () => {
     const appElement = document.getElementById("app");
     const commentsHtml = comments
     .map((comment, index) => getListComments(comment, index)).join("");
@@ -120,4 +120,4 @@ const renderComments = () => {
 
 };
 
-export default renderComments;
+export default renderAppComments;
