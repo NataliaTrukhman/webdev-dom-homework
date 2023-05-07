@@ -1,9 +1,10 @@
-import { comments, postClick, getFetch } from './api.js';
+import { comments, getFetch } from './main.js';
 import getListComments from './renderCommentList.js';
 import { initEventListeners, replyToComment } from './main.js';
+import  {addComment}  from './api.js';
 
+//const host = 'https://webdev-hw-api.vercel.app/api/v2/natalia-trukhman/comments'
 
-const host = 'https://webdev-hw-api.vercel.app/api/v2/natalia-trukhman/comments'
 let token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
 token = null
 const renderAppComments = () => {
@@ -26,17 +27,17 @@ const renderAppComments = () => {
 
 
   </div>`
-       
+
         appElement.innerHTML = appHtml;   //кладем сюда разметку 
         document.getElementById("login-button").addEventListener('click', () => {
             token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
             //renderAppComments ();
 
-           
+
             getFetch()
         });
         return;
-      
+
 
     }
 
@@ -71,7 +72,24 @@ const renderAppComments = () => {
     const buttonElement = document.getElementById('write-button');
     const formInputElement = document.querySelector('.add-form');
 
+    // const deleteButtons = document.querySelectorAll(".delete-button");
+    // for (const deleteButton of deleteButtons) {
+    //     deleteButton.addEventListener("click", (event) => {
+    //         event.stopPropagation();
+    //         const id = deleteButton.dataset.id;
+    //         // Подписываемся на успешное завершение запроса с помощью then
+    //         deleteComment({ id, token })
+    //             .then((response) => {
+    //                 // Получили данные и рендерим их в приложении
+    //                 comments = response.comment;
+    //                 renderAppComments();
+    //             });
+    //         renderAppComments();
+    //     });
+    // }
+
     // buttonElement.addEventListener('click', postClick);
+
     buttonElement.addEventListener('click', () => {
         nameInputElement.classList.remove("error")
         textareaInputElement.classList.remove("error")
@@ -85,33 +103,13 @@ const renderAppComments = () => {
         buttonElement.textContent = 'Комментарий загружается...';
 
         formInputElement.style.display = 'none';
-        fetch(host, {
-            method: 'POST',
-            body: JSON.stringify({
-                text: textareaInputElement.value
-                    .replaceAll('<', '&lt;')
-                    .replaceAll('>', '&gt;')
-                    .replaceAll('"', '&quot;'),
-                name: nameInputElement.value
-                    .replaceAll('<', '&lt;')
-                    .replaceAll('>', '&gt;')
-                    .replaceAll('"', '&quot;'),
-                //forceError: true,
-            }),
-            headers: {
-                Authorization: token,
-            },
+        
+        addComment({
+            name: nameInputElement.value,
+            text: textareaInputElement.value,
+            token
+
         })
-            .then((response) => {
-                console.log(response);
-                if (response.status === 201) {
-                    return response.json();
-                } else if (response.status === 400) {
-                    throw new Error('name должен содержать хотя бы 3 символа');
-                } else {
-                    throw new Error('Сервер упал');
-                }
-            })
             .then(() => {
                 getFetch();
                 buttonElement.disabled = false;
