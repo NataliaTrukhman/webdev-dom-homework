@@ -3,14 +3,11 @@
 // 1. Реализовать форму логина в приложении
 // * Перенести всю разметку в рендер функцию(+)
 // * Сделать форму входа динамической(+(-))
-// * Oтрефакторить приложение на модули
 // * API (+)
-//  Вытащить логин компонент в отдельный модуль
+//  Вытащить логин компонент в отдельный модуль(+)
 //  Вытащить компонент списка задач и форму добавления в отдельный модуль
 // 2. Реализовать форму регистрации
 
-
- //import { } from './api.js';
 import { getComments } from "./api.js";
 import renderAppComments from "./renderFunction.js";
 
@@ -23,7 +20,7 @@ const buttonElement = document.getElementById('write-button');
 // const formInputElement = document.querySelector('.add-form');
 
 const token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
-const host = 'https://webdev-hw-api.vercel.app/api/v2/natalia-trukhman/comments'
+//const host = 'https://webdev-hw-api.vercel.app/api/v2/natalia-trukhman/comments'
 
 export let comments = [];
 
