@@ -70,66 +70,16 @@ export function addComment ({token, text, name}){
 }
 
 
-// export const postClick = () => {
-//     // nameInputElement.classList.remove("error")
-//     // textareaInputElement.classList.remove("error")
-//     if (nameInputElement.value === '' || textareaInputElement.value === '') {
-//           nameInputElement.classList.add("error");
-//         //   textareaInputElement.classList.add("error");
-//         return;
-//     }
+export function loginUser ({ login, password }) {
+    return fetch("https://webdev-hw-api.vercel.app/api/user/login", {
+        method: 'POST',
+        body: JSON.stringify({
+            login,
+            password
+        }),
+    
+    }).then((response) => {
+        return response.json();
+    });
+}
 
-//     buttonElement.disabled = true; //атрибут блокирования кнопки
-//     buttonElement.textContent = 'Комментарий загружается...';
-
-//     formInputElement.style.display = 'none';
-//     fetch(
-//        host, {
-//             method: 'POST',
-//             body: JSON.stringify({
-//                 text: textareaInputElement.value
-//                     .replaceAll('<', '&lt;')
-//                     .replaceAll('>', '&gt;')
-//                     .replaceAll('"', '&quot;'),
-//                 name: nameInputElement.value
-//                     .replaceAll('<', '&lt;')
-//                     .replaceAll('>', '&gt;')
-//                     .replaceAll('"', '&quot;'),
-//                 //forceError: true,
-//             }),
-//             headers: {
-//                 Authorization: token,
-//             },
-//         })
-//         .then((response) => {
-//             console.log(response);
-//             if (response.status === 201) {
-//                 return response.json();
-//             } else if (response.status === 400) {
-//                 throw new Error('name должен содержать хотя бы 3 символа');
-//             } else {
-//                 throw new Error('Сервер упал');
-//             }
-//         })
-//         .then(() => {
-//             getFetch();
-//             buttonElement.disabled = false;
-//             buttonElement.textContent = 'Написать';
-//             nameInputElement.value = '';
-//             textareaInputElement.value = '';
-//             formInputElement.style.display = 'flex';
-//         })
-//         .catch((error) => {
-//             //упал инет
-//             if (error.message === 'name должен содержать хотя бы 3 символа') {
-//                 alert('Поле имя и комментарий должны содержать хотя бы 3 символа');
-//             } else {
-//                 alert('Что-то пошло не так, попробуй позже!');
-//                 formInputElement.style.display = 'none';
-//             }
-//             formInputElement.style.display = 'flex';
-//             buttonElement.disabled = false; //включение кнопки когда инет появился
-//             buttonElement.textContent = 'Написать';
-//             console.warn(error); //отправлять в систему сбора ошибок
-//         });
-// };
