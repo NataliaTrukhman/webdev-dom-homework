@@ -70,12 +70,13 @@ export function addComment ({token, text, name}){
 }
 
 
-export function loginUser ({ login, password }) {
+export function loginUser ({ login, password,name }) {
     return fetch("https://webdev-hw-api.vercel.app/api/user/login", {
         method: 'POST',
         body: JSON.stringify({
             login,
-            password
+            password,
+            name,
         }),
     
     }).then((response) => {

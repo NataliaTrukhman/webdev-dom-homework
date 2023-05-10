@@ -9,22 +9,34 @@ import { renderLogin } from './components/login-components.js'
 let token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
 token = null
 
+let userName = "";
+
 const renderAppComments = () => {
+
     const appElement = document.getElementById("app");
+    const commentsHtml = comments
+        .map((comment, index) => getListComments(comment, index)).join("");
+
     if (!token) { 
         renderLogin({
             appElement,
             setToken: (newToken) => {
                 token = newToken
             },
-            getFetch
+            getFetch,
+            commentsHtml,
+            setUserName: (newUserName) => {
+                userName = newUserName
+            },
 
         });
         return;
     }
 
-    const commentsHtml = comments
-        .map((comment, index) => getListComments(comment, index)).join("");
+
+
+   //////// //если пользователь авторизован/////////
+    
 
     const appHtml = `
     <div class="container">
@@ -36,7 +48,7 @@ const renderAppComments = () => {
     <br />
     <div class="add-form">
       <h3>Форма </h3>
-      <input type="text" class="add-form-name" placeholder="Введите ваше имя" id="name-input" value="" />
+      <input type="text" class="add-form-name" placeholder="Введите ваше имя" id="name-input" value="${userName}" />
       <textarea type="textarea" class="add-form-text" placeholder="Введите ваш коментарий" rows="4"
         id="textarea-input"></textarea>
       <div class="add-form-row">
@@ -45,14 +57,19 @@ const renderAppComments = () => {
     </div>
 
   </div>`
-
     appElement.innerHTML = appHtml;   //кладем сюда разметку
 
 
     const nameInputElement = document.getElementById('name-input');
+    nameInputElement.disabled = true; 
+
     const textareaInputElement = document.getElementById('textarea-input');
     const buttonElement = document.getElementById('write-button');
     const formInputElement = document.querySelector('.add-form');
+
+    
+    //добавить кнопку
+ 
 
     // const deleteButtons = document.querySelectorAll(".delete-button");
     // for (const deleteButton of deleteButtons) {

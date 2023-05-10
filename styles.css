@@ -34,6 +34,17 @@ body {
 
 
 
+
+.test-button {
+  color: #ffffff;
+  outline: none;
+  border: 0;
+  background: transparent;
+  text-decoration: underline;
+  font-size: 16px;
+  text-align: center;
+}
+
 .comments {
   display: flex;
   flex-direction: column;

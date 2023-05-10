@@ -48,13 +48,9 @@ export const getFetch = () => {
             // получили данные и рендерим их в приложении
             comments = appComments;
 
-            renderAppComments();
+             renderAppComments();
         });
 };
-
-
-
-
 
 //добавления ответов на КОММЕНТЫ
 
@@ -99,9 +95,6 @@ export const initEventListeners = () => {
 
 getFetch();
 
-
-
-//buttonElement.addEventListener('click', postClick);
 
 
 
