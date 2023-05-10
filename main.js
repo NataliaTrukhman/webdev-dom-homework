@@ -48,9 +48,22 @@ export const getFetch = () => {
             // получили данные и рендерим их в приложении
             comments = appComments;
 
-            renderAppComments();
+             renderAppComments();
         });
 };
+
+
+
+// const listCommentsElement = document.getElementById('list-comments');
+
+// const newDivButton = `<button>Авторизуйтесь</button>`
+
+// const newDiv= document.createElement('div')
+// newDiv.innerHTML = newDivButton;
+// listCommentsElement.appendChild(newDiv);
+
+
+
 
 
 

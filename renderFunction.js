@@ -10,6 +10,7 @@ let token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
 token = null
 
 const renderAppComments = () => {
+
     const appElement = document.getElementById("app");
     if (!token) { 
         renderLogin({
@@ -17,12 +18,15 @@ const renderAppComments = () => {
             setToken: (newToken) => {
                 token = newToken
             },
-            getFetch
+            getFetch,
 
         });
         return;
     }
 
+
+
+   //////// //если пользователь авторизован/////////
     const commentsHtml = comments
         .map((comment, index) => getListComments(comment, index)).join("");
 
@@ -45,7 +49,6 @@ const renderAppComments = () => {
     </div>
 
   </div>`
-
     appElement.innerHTML = appHtml;   //кладем сюда разметку
 
 
@@ -53,6 +56,15 @@ const renderAppComments = () => {
     const textareaInputElement = document.getElementById('textarea-input');
     const buttonElement = document.getElementById('write-button');
     const formInputElement = document.querySelector('.add-form');
+
+    
+    //добавить кнопку
+    const listCommentsElement = document.getElementById('list-comments');
+    const newDivButton = `<button class="test-button">Авторизуйтесь</button>`
+    const newDiv = document.createElement('div')
+    newDiv.className = 'test-div';
+    newDiv.innerHTML = newDivButton;
+    listCommentsElement.appendChild(newDiv);
 
     // const deleteButtons = document.querySelectorAll(".delete-button");
     // for (const deleteButton of deleteButtons) {

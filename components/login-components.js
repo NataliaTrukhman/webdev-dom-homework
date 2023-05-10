@@ -8,7 +8,7 @@ export function renderLogin({ appElement, setToken, getFetch }) {
     <h1>Лента комментариев</h1>
      <ul class="comments" id="list-comments">
       <!-- Список рендерится из JS -->
-      
+      ${commentsHtml}
     </ul>
 
  <div class="add-form">
@@ -26,6 +26,10 @@ export function renderLogin({ appElement, setToken, getFetch }) {
   </div>`
 
     appElement.innerHTML = appHtml;   //кладем сюда разметку 
+
+
+
+
     document.getElementById("login-button").addEventListener('click', () => {
         //    token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
         //renderAppComments (); 
