@@ -62,7 +62,7 @@ export const getFetch = () => {
     const commentsElements = document.querySelectorAll(".comment");
     for (const commentsElement of commentsElements) {
         commentsElement.addEventListener("click", () => {
-
+            const textareaInputElement = document.getElementById('textarea-input');
 
             textareaInputElement.value = commentsElement.dataset.answer;
             //renderAppComments();
