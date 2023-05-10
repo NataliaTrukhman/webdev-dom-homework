@@ -13,6 +13,7 @@ let userName = "";
 
 const renderAppComments = () => {
 
+
     const appElement = document.getElementById("app");
     const commentsHtml = comments
         .map((comment, index) => getListComments(comment, index)).join("");

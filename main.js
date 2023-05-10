@@ -49,6 +49,7 @@ export const getFetch = () => {
             comments = appComments;
 
              renderAppComments();
+             renderAppComments();
         });
 };
 
