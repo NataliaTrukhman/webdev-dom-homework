@@ -6,6 +6,10 @@ export function renderLogin({ appElement, setToken, getFetch }) {
     const appHtml = `
     <div class="container">
     <h1>Лента комментариев</h1>
+     <ul class="comments" id="list-comments">
+      <!-- Список рендерится из JS -->
+      
+    </ul>
 
  <div class="add-form">
       <h3>Форма входа</h3>
