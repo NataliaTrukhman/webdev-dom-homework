@@ -19,14 +19,14 @@ const buttonElement = document.getElementById('write-button');
  const textareaInputElement = document.getElementById('textarea-input');
 // const formInputElement = document.querySelector('.add-form');
 
-const token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
+ const token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
 //const host = 'https://webdev-hw-api.vercel.app/api/v2/natalia-trukhman/comments'
 
 export let comments = [];
 
 export const getFetch = () => {
 
-    return getComments({token})
+    return getComments({ token })
         // Подписываемся на результат преобразования
         .then((answerApi) => {
             const appComments = answerApi.comments.map((comment) => {
@@ -49,7 +49,7 @@ export const getFetch = () => {
             comments = appComments;
 
              renderAppComments();
-             renderAppComments();
+             
         });
 };
 
@@ -85,7 +85,7 @@ export const initEventListeners = () => {
                 comments[index].isliked = true;
                 comments[index].likes++
             }
-            renderAppComments;
+            renderAppComments();
 
 
         });
