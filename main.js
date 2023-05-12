@@ -49,7 +49,7 @@ export const replyToComment = () => {
             const textareaInputElement = document.getElementById('textarea-input');
 
             textareaInputElement.value = commentsElement.dataset.answer;
-            /
+            
 
         });
 
@@ -57,7 +57,7 @@ export const replyToComment = () => {
 }
 
 ////функция доб-я обработчика клика на  ЛАЙК и счетчик///
-export const initEventListeners = () => {
+export const initEventListeners = (comments, token, userName) => {
     const likesElements = document.querySelectorAll(".like-button");
     //console.log(likesElements);   -коллекция коментов список
     for (const likesElement of likesElements) {       //доб обработчик клика на кнопку лайка
