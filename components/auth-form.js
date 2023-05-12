@@ -3,7 +3,7 @@ import { getFetch } from "../main.js"
 
 
 
-export function renderAuthForm({ appElement, setToken, setUserName }) {
+export function renderAuthForm({ appElement}) {
     appElement.innerHTML = ` 
 <div class="container">
     <div class="add-form">
@@ -24,9 +24,7 @@ export function renderAuthForm({ appElement, setToken, setUserName }) {
             login: "admin",
             password: "admin",
         }).then((user) => {
-            setToken(`Bearer ${user.user.token}`)
-            setUserName(user.user.name)
-            getFetch();
+            getFetch(`Bearer ${user.user.token}`, user.user.name);
         });
 
 

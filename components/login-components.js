@@ -1,11 +1,6 @@
-
-
-import { loginUser } from "../api.js";
-
-
 import { renderAuthForm } from "./auth-form.js"
 
-export function renderLogin({ appElement, setToken, setUserName, commentsHtml }) {
+export function renderLogin({ appElement, commentsHtml }) {
     const appHtml = `
     <div class="container">
     <h1>Лента комментариев</h1>
@@ -24,7 +19,7 @@ export function renderLogin({ appElement, setToken, setUserName, commentsHtml })
 
   document.getElementById("auth-button").addEventListener('click', () => {
 
-    renderAuthForm({ appElement, setToken, setUserName })
+    renderAuthForm({ appElement})
 
     // appElement.innerHTML = ` <div class="add-form">
     //   <h3>Форма входа</h3>
@@ -54,18 +49,6 @@ export function renderLogin({ appElement, setToken, setUserName, commentsHtml })
     // });
 
 
-  })
+  });
 
 }
-
-
-//  <div class="add-form">
-//       <h3>Форма входа</h3>
-//       <input type="text" class="add-form-login" placeholder="Введите логин" id="login-input"/>
-//       <br />
-//       <input type="password" class="add-form-login" placeholder="Введите пароль" id="password-input"/>
-
-//       <div class="add-form2">
-//         <button class="add-form-button1" id="login-button">Войти</button>
-//       </div>
-//     </div>

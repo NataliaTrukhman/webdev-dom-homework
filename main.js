@@ -12,57 +12,44 @@ import { getComments } from "./api.js";
 import renderAppComments from "./renderFunction.js";
 
 
+export const getFetch = (token, userName) => {
 
-const buttonElement = document.getElementById('write-button');
-// const listCommentsElement = document.getElementById('list-comments');
-// const nameInputElement = document.getElementById('name-input');
- const textareaInputElement = document.getElementById('textarea-input');
-// const formInputElement = document.querySelector('.add-form');
+    return (
+        getComments({ token })
+            // Подписываемся на результат преобразования
+            .then((answerApi) => {
+                const appComments = answerApi.comments.map((comment) => {
+                    return {
+                        name: comment.author.name,
+                        date: new Date().toLocaleString("ru", {
+                            year: "2-digit",
+                            month: "2-digit",
+                            day: "2-digit",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                        }).replace(", ", " "),
+                        text: comment.text,
+                        likes: comment.likes,
+                        isliked: false,
+                    };
+                });
 
- const token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
-//const host = 'https://webdev-hw-api.vercel.app/api/v2/natalia-trukhman/comments'
+                renderAppComments(token, appComments, userName);
 
-export let comments = [];
-
-export const getFetch = () => {
-
-    return getComments({ token })
-        // Подписываемся на результат преобразования
-        .then((answerApi) => {
-            const appComments = answerApi.comments.map((comment) => {
-                return {
-                    name: comment.author.name,
-                    date: new Date().toLocaleString("ru", {
-                        year: "2-digit",
-                        month: "2-digit",
-                        day: "2-digit",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                    }).replace(", ", " "),
-                    text: comment.text,
-                    likes: comment.likes,
-                    isliked: false,
-                }
             })
-
-            // получили данные и рендерим их в приложении
-            comments = appComments;
-
-             renderAppComments();
-             
-        });
+    )
 };
 
 //добавления ответов на КОММЕНТЫ
 
- export const replyToComment = () => {
+export const replyToComment = () => {
     const commentsElements = document.querySelectorAll(".comment");
     for (const commentsElement of commentsElements) {
         commentsElement.addEventListener("click", () => {
             const textareaInputElement = document.getElementById('textarea-input');
 
             textareaInputElement.value = commentsElement.dataset.answer;
-            //renderAppComments();
+            /
 
         });
 
@@ -85,29 +72,26 @@ export const initEventListeners = () => {
                 comments[index].isliked = true;
                 comments[index].likes++
             }
-            renderAppComments();
-
-
+            renderAppComments(token, comments, userName);
         });
     }
 };
 
-//renderAppComments();
-
-getFetch();
 
 
+getFetch("");
 
 
 
 
 
 
-  
 
 
 
 
 
 
-   
+
+
+

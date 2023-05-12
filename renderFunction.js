@@ -1,43 +1,24 @@
-import { comments, getFetch } from './main.js';
+import { getFetch } from './main.js';
 import getListComments from './renderCommentList.js';
 import { initEventListeners, replyToComment } from './main.js';
 import { addComment } from './api.js';
 import { renderLogin } from './components/login-components.js'
 
-//const host = 'https://webdev-hw-api.vercel.app/api/v2/natalia-trukhman/comments'
-
-let token = "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
-token = null
-
-let userName = "";
-
-const renderAppComments = () => {
-
-
+const renderAppComments = (token, comments, userName = "") => {
     const appElement = document.getElementById("app");
     const commentsHtml = comments
         .map((comment, index) => getListComments(comment, index)).join("");
 
-    if (!token) { 
+    if (!token) {
         renderLogin({
             appElement,
-            setToken: (newToken) => {
-                token = newToken
-            },
             getFetch,
             commentsHtml,
-            setUserName: (newUserName) => {
-                userName = newUserName
-            },
-
         });
         return;
     }
 
-
-
-   //////// //если пользователь авторизован/////////
-    
+    //////// //если пользователь авторизован/////////
 
     const appHtml = `
     <div class="container">
@@ -62,15 +43,15 @@ const renderAppComments = () => {
 
 
     const nameInputElement = document.getElementById('name-input');
-    nameInputElement.disabled = true; 
+    nameInputElement.disabled = true;
 
     const textareaInputElement = document.getElementById('textarea-input');
     const buttonElement = document.getElementById('write-button');
     const formInputElement = document.querySelector('.add-form');
 
-    
+
     //добавить кнопку
- 
+
 
     // const deleteButtons = document.querySelectorAll(".delete-button");
     // for (const deleteButton of deleteButtons) {
@@ -88,7 +69,7 @@ const renderAppComments = () => {
     //     });
     // }
 
-  
+
 
     buttonElement.addEventListener('click', () => {
         nameInputElement.classList.remove("error")
@@ -110,7 +91,7 @@ const renderAppComments = () => {
             token
 
         })
-            .then(() => {
+         .then(() => {
                 getFetch();
                 buttonElement.disabled = false;
                 buttonElement.textContent = 'Написать';
@@ -133,7 +114,7 @@ const renderAppComments = () => {
             });
     });
 
-    initEventListeners();      //проинициализировать событие на новых создн-х элементах лайки
+    initEventListeners(comments, token, userName);      //проинициализировать событие на новых создн-х элементах лайки
     replyToComment()
 
 };
