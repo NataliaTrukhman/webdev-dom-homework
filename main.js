@@ -1,26 +1,55 @@
-import { comments, getFetch, postClick } from './api.js';
-import renderComments from "./renderFunction.js";
+
+// План
+// 1. Реализовать форму логина в приложении
+// * Перенести всю разметку в рендер функцию(+)
+// * Сделать форму входа динамической(+(-))
+// * API (+)
+//  Вытащить логин компонент в отдельный модуль(+)
+//  Вытащить компонент списка задач и форму добавления в отдельный модуль
+// 2. Реализовать форму регистрации
+
+import { getComments } from "./api.js";
+import renderAppComments from "./renderFunction.js";
 
 
+export const getFetch = (token, userName) => {
 
-const buttonElement = document.getElementById('write-button');
-// const listCommentsElement = document.getElementById('list-comments');
-// const nameInputElement = document.getElementById('name-input');
- const textareaInputElement = document.getElementById('textarea-input');
-// const formInputElement = document.querySelector('.add-form');
+    return (
+        getComments({ token })
+            // Подписываемся на результат преобразования
+            .then((answerApi) => {
+                const appComments = answerApi.comments.map((comment) => {
+                    return {
+                        name: comment.author.name,
+                        date: new Date().toLocaleString("ru", {
+                            year: "2-digit",
+                            month: "2-digit",
+                            day: "2-digit",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                        }).replace(", ", " "),
+                        text: comment.text,
+                        likes: comment.likes,
+                        isliked: false,
+                    };
+                });
 
+                renderAppComments(token, appComments, userName);
 
+            })
+    )
+};
 
 //добавления ответов на КОММЕНТЫ
 
- export const replyToComment = () => {
+export const replyToComment = () => {
     const commentsElements = document.querySelectorAll(".comment");
     for (const commentsElement of commentsElements) {
         commentsElement.addEventListener("click", () => {
-
+            const textareaInputElement = document.getElementById('textarea-input');
 
             textareaInputElement.value = commentsElement.dataset.answer;
-            //renderComments();
+            
 
         });
 
@@ -28,7 +57,7 @@ const buttonElement = document.getElementById('write-button');
 }
 
 ////функция доб-я обработчика клика на  ЛАЙК и счетчик///
-export const initEventListeners = () => {
+export const initEventListeners = (comments, token, userName) => {
     const likesElements = document.querySelectorAll(".like-button");
     //console.log(likesElements);   -коллекция коментов список
     for (const likesElement of likesElements) {       //доб обработчик клика на кнопку лайка
@@ -43,30 +72,26 @@ export const initEventListeners = () => {
                 comments[index].isliked = true;
                 comments[index].likes++
             }
-            renderComments();
-
-
+            renderAppComments(token, comments, userName);
         });
     }
 };
 
-//renderComments();
-
-getFetch();
 
 
-
-buttonElement.addEventListener('click', postClick);
-
-
-
-
-
-  
+getFetch("");
 
 
 
 
 
 
-   
+
+
+
+
+
+
+
+
+
