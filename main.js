@@ -21,7 +21,8 @@ export const getFetch = (token, userName) => {
                 const appComments = answerApi.comments.map((comment) => {
                     return {
                         name: comment.author.name,
-                        date: new Date().toLocaleString("ru", {
+                        // date: comment.date,
+                        date: new Date(comment.date).toLocaleString("ru", {
                             year: "2-digit",
                             month: "2-digit",
                             day: "2-digit",
