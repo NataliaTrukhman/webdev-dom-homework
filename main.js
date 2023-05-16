@@ -10,6 +10,7 @@
 
 import { getComments } from "./api.js";
 import renderAppComments from "./renderFunction.js";
+import { format } from "date-fns"
 
 
 export const getFetch = (token, userName) => {
@@ -22,13 +23,14 @@ export const getFetch = (token, userName) => {
                     return {
                         name: comment.author.name,
                         // date: comment.date,
-                        date: new Date(comment.date).toLocaleString("ru", {
-                            year: "2-digit",
-                            month: "2-digit",
-                            day: "2-digit",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                        }).replace(", ", " "),
+                        date: format(new Date(comment.date), 'yyyy-mm-dd hh.mm.ss'),
+                        // date: new Date(comment.date).toLocaleString("ru", {
+                        //     year: "2-digit",
+                        //     month: "2-digit",
+                        //     day: "2-digit",
+                        //     hour: "2-digit",
+                        //     minute: "2-digit",
+                        // }).replace(", ", " "),
                         text: comment.text,
                         likes: comment.likes,
                         isliked: false,
